@@ -6,13 +6,13 @@
 
     <ChatMessages :messages="messages" />
 
-    <MessagesBox />
+    <MessagesBox @send-message="onMessage($event)" />
   </div>
 </template>
 <script setup lang="ts">
 import type { ChatMessage } from '@/interfaces/chat-message.interface'
-import ChatMessages from '../components/ChatMessages.vue'
-import MessagesBox from '../components/MessagesBox.vue'
+import ChatMessages from '@/components/ChatMessages.vue'
+import MessagesBox from '@/components/MessagesBox.vue'
 import { ref } from 'vue'
 
 const messages = ref<ChatMessage[]>([
@@ -33,4 +33,12 @@ const messages = ref<ChatMessage[]>([
     image: 'https://yesno.wtf/assets/no/13-755222c98795431aa2e7d453ab1e75a1.gif'
   }
 ])
+
+const onMessage = (text: string) => {
+  messages.value.push({
+    id: new Date().getTime(),
+    message: text,
+    itsMine: true
+  })
+}
 </script>
