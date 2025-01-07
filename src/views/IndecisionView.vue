@@ -4,12 +4,33 @@
       <span>Mi esposa</span>
     </div>
 
-    <ChatMessages />
+    <ChatMessages :messages="messages" />
 
     <MessagesBox />
   </div>
 </template>
 <script setup lang="ts">
+import type { ChatMessage } from '@/interfaces/chat-message.interface'
 import ChatMessages from '../components/ChatMessages.vue'
 import MessagesBox from '../components/MessagesBox.vue'
+import { ref } from 'vue'
+
+const messages = ref<ChatMessage[]>([
+  {
+    id: new Date().getTime(),
+    message: 'Hola mundo REF',
+    itsMine: true
+  },
+  {
+    id: new Date().getTime(),
+    message: 'Hello world REF',
+    itsMine: true
+  },
+  {
+    id: new Date().getTime() + 1,
+    message: 'No',
+    itsMine: false,
+    image: 'https://yesno.wtf/assets/no/13-755222c98795431aa2e7d453ab1e75a1.gif'
+  }
+])
 </script>
